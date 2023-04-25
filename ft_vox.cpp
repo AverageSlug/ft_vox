@@ -1,15 +1,16 @@
 #include "ft_vox.hpp"
 
-float	angle = 0.0;
-float	lx = 0.0f, lz = -1.0f;
-float	x = 0.0f, z = 0.0f;
+float	lx = 0.0f, ly = 0.0f, lz = -1.0f;
+float	x = 0.0f, y = 1.0f, z = 0.0f;
+float	angleLR = 0.0f, angleUD = 0.0f;
+int		xxx = 960, yyy = 540;
 
 void	display()
 {
 	glutSwapBuffers();
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 	glLoadIdentity();
-	gluLookAt(x, 1.0f, z, x+lx, 1.0f, z+lz, 0.0f, 1.0f, 0.0f);
+	gluLookAt(x, y, z, x+lx, y+ly, z+lz, 0.0f, 1.0f, 0.0f);
 	glPushMatrix();
 		glTranslatef(0.0,0.0,-10);
 		glColor3f(0,255,0);
@@ -23,40 +24,52 @@ void	display()
 	glFlush();
 }
 
-void	key_presses(unsigned char key, int x, int y)
+void	key_presses(unsigned char key, int xx, int yy)
 {
-	(void)x;
-	(void)y;
+	(void)xx;
+	(void)yy;
 	if (key == 27)
 		exit(0);
 }
 
-void	arrow_keys(int key, int a, int b)
+void	arrow_keys(int key, int xx, int yy)
 {
-	(void)a;
-	(void)b;
+	(void)xx;
+	(void)yy;
 	float	fraction = 0.1f;
 
 	switch (key) {
 		case GLUT_KEY_LEFT :
-			angle -= 0.05f;
-			lx = sin(angle);
-			lz = -cos(angle);
+			x += lz * fraction;
+			z += lx * fraction;
 			break;
 		case GLUT_KEY_RIGHT :
-			angle += 0.05f;
-			lx = sin(angle);
-			lz = -cos(angle);
+			x -= lz * fraction;
+			z -= lx * fraction;
 			break;
 		case GLUT_KEY_UP :
 			x += lx * fraction;
+			y += ly * fraction;
 			z += lz * fraction;
 			break;
 		case GLUT_KEY_DOWN :
 			x -= lx * fraction;
+			y -= ly * fraction;
 			z -= lz * fraction;
 			break;
 	}
+}
+
+void	move_camera(int xx, int yy)
+{
+	glutWarpPointer(960, 540);
+	angleLR += 0.001f * (xxx - xx);
+	angleUD += 0.001f * (yyy - yy);
+	xxx = xx;
+	yyy = yy;
+	lx = cos(angleUD) * sin(angleLR);
+	ly = sin(angleUD);
+	lz = cos(angleUD) * cos(angleLR);
 }
 
 void	idle()
@@ -70,14 +83,15 @@ int		main(int argc, char** argv)
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
 	glutInitWindowSize(192, 108);
 	glutCreateWindow("42");
-	// glutFullScreen();
+	glutFullScreen();
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(80.0f,(GLfloat)1920/(GLfloat)1080, 1.0f, 320.0f);
 	glMatrixMode(GL_MODELVIEW);
 	glutDisplayFunc(display);
-	glutKeyboardFunc(key_presses);
 	glutSpecialFunc(arrow_keys);
+	glutPassiveMotionFunc(move_camera);
+	glutKeyboardFunc(key_presses);
 	glEnable(GL_DEPTH_TEST);
 	glutIdleFunc(idle);
 	glutMainLoop();

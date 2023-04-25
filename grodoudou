@@ -4,7 +4,7 @@ Memory handling (ie only load a certain amount of blocks at once)
 160 render distance minimum (224(?) minimum for bonus)
 Proper 3D Texturing
 Random terrain generation
-Player movement (arrow keys)
+Player movement (arrow keys) - multiple key presses at once!
 Camera movement (mouse)
 FoV
 Skybox
