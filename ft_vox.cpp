@@ -31,10 +31,10 @@ void	key_presses(unsigned char key, int x, int y)
 		exit(0);
 }
 
-void	arrow_keys(int key, int x, int y)
+void	arrow_keys(int key, int a, int b)
 {
-	(void)x;
-	(void)y;
+	(void)a;
+	(void)b;
 	float	fraction = 0.1f;
 
 	switch (key) {

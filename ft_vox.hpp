@@ -1,6 +1,7 @@
 #ifndef FT_VOX_H
 # define FT_VOX_H
 
+#define GL_SILENCE_DEPRECATION
 #include <GL/freeglut.h>
 
 #include <iostream>
