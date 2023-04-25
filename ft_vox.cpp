@@ -16,7 +16,7 @@ void	display()
 		glutSolidCube(1);
 	glPopMatrix();
 	glPushMatrix();
-		glTranslatef(1,0,-10);
+		glTranslatef(10,0,0);
 		glColor3f(255,0,0);
 		glutSolidCube(1);
 	glPopMatrix();
@@ -33,6 +33,11 @@ void	display()
 	glPushMatrix();
 		glTranslatef(0,10,0);
 		glColor3f(0,255,255);
+		glutSolidCube(1);
+	glPopMatrix();
+	glPushMatrix();
+		glTranslatef(-10,0,0);
+		glColor3f(255,0,255);
 		glutSolidCube(1);
 	glPopMatrix();
 	glFlush();
@@ -78,6 +83,10 @@ void	move_camera(int xx, int yy)
 {
 	angleLR += 0.0005f * float(xx - 960);
 	angleUD += 0.0005f * float(yy - 540);
+	if (angleUD > 1.5)
+		angleUD = 1.5;
+	if (angleUD < -1.5)
+		angleUD = -1.5;
 	lx = cos(angleUD) * sin(angleLR);
 	ly = -sin(angleUD);
 	lz = cos(angleUD) * -cos(angleLR);
@@ -93,7 +102,7 @@ int		main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
-	glutInitWindowSize(192, 108);
+	glutInitWindowSize(16, 9);
 	glutCreateWindow("42");
 	glutFullScreen();
 	glMatrixMode(GL_PROJECTION);
