@@ -4,10 +4,12 @@ CXX			=	clang++
 
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
-ifdef		__APPLE_CC__
-GLFLAGS		=	-framework OpenGL -framework GLUT
+UNAME := $(shell uname -s)
+
+ifeq ($(UNAME), Linux)
+	GLFLAGS		=	-lGL -lGLU -lglut
 else
-GLFLAGS		=	-lGL -lGLU -lglut
+	GLFLAGS		=	-framework OpenGL -framework GLUT
 endif
 
 SRCS		=	$(wildcard *.cpp)
