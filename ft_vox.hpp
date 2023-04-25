@@ -1,5 +1,7 @@
-#ifndef SCOP_H
-# define SCOP_H
+#ifndef FT_VOX_H
+# define FT_VOX_H
+
+#include <GL/freeglut.h>
 
 #include <iostream>
 #include <string>

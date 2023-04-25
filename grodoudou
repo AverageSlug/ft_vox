@@ -1,0 +1,16 @@
+Classes (blocks etc)
+Multiple objects rendered at once
+Memory handling (ie only load a certain amount of blocks at once)
+160 render distance minimum (224(?) minimum for bonus)
+Proper 3D Texturing
+Random terrain generation
+Player movement (arrow keys)
+Camera movement (mouse)
+FoV
+Skybox
+Collision?
+
+Bonuses:
+FPS counter
+Multiple biomes
+Breakable blocks
