@@ -3,6 +3,7 @@
 float	lx = 0.0f, ly = 0.0f, lz = -1.0f;
 float	x = 0.0f, y = 1.0f, z = 0.0f;
 float	angleLR = 0.0f, angleUD = 0.0f;
+int		width = 0, height = 0;
 
 void	display()
 {
@@ -81,8 +82,8 @@ void	arrow_keys(int key, int xx, int yy)
 
 void	move_camera(int xx, int yy)
 {
-	angleLR += 0.0005f * float(xx - 960);
-	angleUD += 0.0005f * float(yy - 540);
+	angleLR += 0.0005f * float(xx - width / 2);
+	angleUD += 0.0005f * float(yy - height / 2);
 	if (angleUD > 1.5)
 		angleUD = 1.5;
 	if (angleUD < -1.5)
@@ -94,20 +95,21 @@ void	move_camera(int xx, int yy)
 
 void	idle()
 {
-	glutWarpPointer(960, 540);
+	glutWarpPointer(width / 2, height / 2);
 	glutPostRedisplay();
 }
 
 int		main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
+	width = glutGet(GLUT_SCREEN_WIDTH), height = glutGet(GLUT_SCREEN_HEIGHT);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
-	glutInitWindowSize(16, 9);
+	glutInitWindowSize(width, height);
 	glutCreateWindow("42");
 	glutFullScreen();
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(80.0f,(GLfloat)1920/(GLfloat)1080, 1.0f, 320.0f);
+	gluPerspective(80.0f,(GLfloat)width/(GLfloat)height, 1.0f, 320.0f);
 	glMatrixMode(GL_MODELVIEW);
 	glutDisplayFunc(display);
 	glutSpecialFunc(arrow_keys);
