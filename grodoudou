@@ -1,12 +1,12 @@
-Classes (blocks etc)
-Multiple objects rendered at once
+Classes (blocks etc)												WHAT ELSE?
+Multiple objects rendered at once									LAGGY AF FOR ME
 Memory handling (ie only load a certain amount of blocks at once)
-160 render distance minimum (224(?) minimum for bonus)
+160 render distance minimum (224(?) minimum for bonus)				LAGGY AF FOR ME
 Proper 3D Texturing
 Random terrain generation
-Player movement (arrow keys) - multiple key presses at once!
-Camera movement (mouse)
-FoV
+Player movement (arrow keys) - multiple key presses at once!		DONE
+Camera movement (mouse)												DONE (note: mac sucks lmfao)
+FoV																	DONE
 Skybox
 Collision?
 
