@@ -2,7 +2,7 @@
 
 float	lx = 0.0f, ly = 0.0f, lz = 0.0f;
 float	x = 0.0f, y = 16.0f, z = 0.0f;
-float	fraction = 0.1f;
+float	fraction = 0.001f;
 int		speed;
 float	angleLR = 0.0f, angleUD = 0.0f;
 int		width = 0, height = 0;
@@ -10,6 +10,7 @@ bool	keys[4] = {false, false, false, false};
 
 void	display()
 {
+	int f = 0;
 	glutSwapBuffers();
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 	glLoadIdentity();
@@ -20,9 +21,10 @@ void	display()
 			{
 				glPushMatrix();
 					glTranslatef(i,j,k);
-					glColor3f(0,255,0);
+					glColor3f((f % 3) == 0 ? 1 : 0, (f % 3) == 1 ? 1 : 0, (f % 3) == 2 ? 1 : 0);
 					glutSolidCube(1);
 				glPopMatrix();
+				f++;
 			}
 	glFlush();
 }
@@ -82,7 +84,7 @@ void	idle()
 {
 	if (speed == 1)
 	{
-		fraction = abs(fraction - 2.0f) + 0.1f;
+		fraction = abs(fraction - 0.02f) + 0.001f;
 		speed = 2;
 	}
 	if (((keys[0] ^ keys[1]) && (keys[2] || keys[3])) || ((keys[0] || keys[1]) && (keys[2] ^ keys[3])))
